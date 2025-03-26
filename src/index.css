@@ -1,19 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  --background: #ffffff;
-  --blue: #1c1f6e;
-  --danger: #ef4343;
-  --red: #ff6d6d;
-  --primary: #1c1f6e;
-  --green: #14cdc8;
-  --secondary: #f4f6fd;
-  --shadow: #1c1f6e1f;
-  --text-primary: #000;
-  --text-secondary: #1c1f6e;
-  --text-gray: #a1a9b8;
-  --white: #ffffff;
-  --yellow: #f9d100;
+  --background-light: #fff2;
+  --background-dark: #000d;
 }
 
 *,
