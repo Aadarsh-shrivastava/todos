@@ -1,11 +1,9 @@
 import './App.css'
-import HomeScreen from './screens/Homescreen/HomeScreen'
+import { HomePage } from './pages/Homescreen/HomePages'
 
 function App() {
   return (
-    <>
-    <HomeScreen/>
-    </>
+    <HomePage/>
   )
 }
 

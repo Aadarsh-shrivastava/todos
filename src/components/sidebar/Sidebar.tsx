@@ -1,11 +1,9 @@
 import './Sidebar.css'
 
-function Sidebar() {
+export function Sidebar() {
   return (
     <aside id='sidebar' className='sidebar-container'> 
         <p>sidebar</p>
     </aside>
   )
 }
-
-export default Sidebar
