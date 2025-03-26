@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --background: #ffffff;
+  --blue: #1c1f6e;
+  --danger: #ef4343;
+  --red: #ff6d6d;
+  --primary: #1c1f6e;
+  --green: #14cdc8;
+  --secondary: #f4f6fd;
+  --shadow: #1c1f6e1f;
+  --text-primary: #000;
+  --text-secondary: #1c1f6e;
+  --text-gray: #a1a9b8;
+  --white: #ffffff;
+  --yellow: #f9d100;
+}
+
+*,
+*::before,
+*::after {
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* elemetns */
+
+html {
+  font-family: "Work Sans", sans-serif;
+  font-size: 62.5%;
+  overflow: auto;
+}
+
+img {
+  display: inline-block;
+  margin: 0.5rem;
+  max-width: 100%;
+}
+
+body {
+  background-color: var(--background);
+  height: 100vh;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
