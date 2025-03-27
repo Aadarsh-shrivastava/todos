@@ -3,7 +3,7 @@ import './Sidebar.css'
 export function Sidebar() {
   return (
     <aside id='sidebar' className='sidebar-container'> 
-        <p>sidebar</p>
+        <p>side bar</p>
     </aside>
   )
 }
