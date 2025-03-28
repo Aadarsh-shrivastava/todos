@@ -3,17 +3,17 @@ import { List } from "../types/List";
 import { Task } from "../types/Task";
 
 interface ListsContextProps {
-  lists: List[];
   addList: (list: List) => void;
-  deleteList: (id: number) => void;
-  updateList: (id: number, updatedList: Partial<List>) => void;
   addTask: (listId: number, task: Task) => void;
+  deleteList: (id: number) => void;
+  deleteTask: (listId: number, taskId: number) => void;
+  lists: List[];
+  updateList: (id: number, updatedList: Partial<List>) => void;
   updateTask: (
     listId: number,
     taskId: number,
     updatedTask: Partial<Task>,
   ) => void;
-  deleteTask: (listId: number, taskId: number) => void;
 }
 
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
