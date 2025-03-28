@@ -1,7 +1,5 @@
-import './TaskListArea.css'
+import "./TaskListArea.css";
 
 export function TaskListArea() {
-  return (
-    <div className='taskListArea'>TaskListArea</div>
-  )
+  return <div className="taskListArea">TaskListArea</div>;
 }
