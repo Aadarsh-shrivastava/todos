@@ -2,7 +2,7 @@ import "./Sidebar.css";
 
 export function Sidebar() {
   return (
-    <aside id="sidebar" className="sidebar-container">
+    <aside className="sidebar-container" id="sidebar">
       <p>sidebar </p>
     </aside>
   );

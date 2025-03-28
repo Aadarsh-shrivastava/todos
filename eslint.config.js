@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint'
 import sortKeysFix from 'eslint-plugin-sort-keys-fix'
 import prettierConfig from 'eslint-config-prettier'
 import prettierPlugin from 'eslint-plugin-prettier'
-import perfectionist from 'eslint-plugin-perfectionist'
+import react from "eslint-plugin-react"
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -21,16 +21,44 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'prettier': prettierPlugin,
-      'perfectionist': perfectionist,
       'sort-keys-fix': sortKeysFix,
+      'react': react,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
       'no-console': ['warn'],
       'prettier/prettier': 'error',
       "sort-keys": ["error", "asc", { "caseSensitive": true, "natural": false, "minKeys": 2 }],
-      'perfectionist/sort-union-types': ['error', { 'order': 'asc' }],
-      'sort-keys-fix/sort-keys-fix': 'error'
+      'sort-keys-fix/sort-keys-fix': 'error',
+      "react/jsx-sort-props": [
+        "error",
+        {
+          "callbacksLast": true, // Place callbacks at the end
+          "shorthandFirst": true, // Place shorthand props first
+          "ignoreCase": true, // Ignore case when sorting
+          "noSortAlphabetically": false // Sort alphabetically
+        }
+      ],
+      "@typescript-eslint/member-ordering": [
+        "error",
+        {
+          "default": [
+            "public-static-field",
+            "public-instance-field",
+            "protected-static-field",
+            "protected-instance-field",
+            "private-static-field",
+            "private-instance-field",
+            "constructor",
+            "public-static-method",
+            "public-instance-method",
+            "protected-static-method",
+            "protected-instance-method",
+            "private-static-method",
+            "private-instance-method"
+          ]
+        }
+      ]
     },
   },
 )
