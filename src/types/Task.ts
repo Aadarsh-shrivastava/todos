@@ -1,10 +1,8 @@
-
 export type Task = {
-    id:number;
-    name:string;
-    isDone:boolean;
-    priority:number;
-    createdAt:Date;
-    modifiedAt:Date;
-}
-
+  createdAt: Date;
+  id: number;
+  isDone: boolean;
+  modifiedAt: Date;
+  name: string;
+  priority: number;
+};
