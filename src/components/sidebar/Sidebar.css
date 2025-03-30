@@ -1,6 +1,10 @@
 /* classes */
 .sidebar-container{
-    border: 1px black solid;
+    border: 5px white solid;
+    box-shadow: 10px 0px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    width: 20% ;
+    justify-content: space-between;
+    width: 30%;
 }

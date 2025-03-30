@@ -1,0 +1,26 @@
+.listitem-picture{
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+}
+.listitem-section{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.listitem-container{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.listitem-count{
+    align-content: center;
+    height: 30px;
+    width: 30px;
+    
+}

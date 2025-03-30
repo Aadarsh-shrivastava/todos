@@ -1,11 +1,11 @@
 import { Task } from "./Task";
 
 export type List = {
-    id:number;
-    name:string;
-    taskCount:number;
-    tasks:Task[];
-    createdAt:Date;
-    modifiedAt:Date;
-}
-
+  createdAt?: Date;
+  icon?: string;
+  id: number;
+  modifiedAt?: Date;
+  name: string;
+  taskCount: number;
+  tasks: Task[];
+};

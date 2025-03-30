@@ -1,60 +1,36 @@
-export const sampledata = [
+import my_day_icon from "../assets/my_day.svg";
+import planned_icon from "../assets/planned.svg";
+import tasks_icon from "../assets/tasks.svg";
+import important_icon from "../assets/Important.svg";
+import { List } from "../types/List";
+
+export const DefaultLists: List[] = [
   {
-    createdAt: new Date(),
+    icon: my_day_icon,
     id: 1,
-    modifiedAt: new Date(),
-    name: "Groceries",
-    taskCount: 2,
-    tasks: [
-      {
-        createdAt: new Date(),
-        id: 1,
-        isDone: false,
-        modifiedAt: new Date(),
-        name: "Buy milk",
-        priority: 2,
-      },
-      {
-        createdAt: new Date(),
-        id: 2,
-        isDone: true,
-        modifiedAt: new Date(),
-        name: "Get vegetables",
-        priority: 1,
-      },
-    ],
+    name: "My day",
+    taskCount: 0,
+    tasks: [],
   },
   {
-    createdAt: new Date(),
+    icon: important_icon,
     id: 2,
-    modifiedAt: new Date(),
-    name: "Work Tasks",
-    taskCount: 3,
-    tasks: [
-      {
-        createdAt: new Date(),
-        id: 3,
-        isDone: false,
-        modifiedAt: new Date(),
-        name: "Finish report",
-        priority: 3,
-      },
-      {
-        createdAt: new Date(),
-        id: 4,
-        isDone: false,
-        modifiedAt: new Date(),
-        name: "Email client",
-        priority: 2,
-      },
-      {
-        createdAt: new Date(),
-        id: 5,
-        isDone: true,
-        modifiedAt: new Date(),
-        name: "Prepare presentation",
-        priority: 1,
-      },
-    ],
+    name: "Important",
+    taskCount: 0,
+    tasks: [],
+  },
+  {
+    icon: planned_icon,
+    id: 3,
+    name: "Planned",
+    taskCount: 0,
+    tasks: [],
+  },
+  {
+    icon: tasks_icon,
+    id: 4,
+    name: "Tasks",
+    taskCount: 0,
+    tasks: [],
   },
 ];
