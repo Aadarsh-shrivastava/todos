@@ -1,11 +1,9 @@
 import "./AddListButton.css";
 
-function AddListButton() {
+export function AddListButton() {
   return (
     <div className="addlist-button">
       <p>Add List</p>
     </div>
   );
 }
-
-export default AddListButton;

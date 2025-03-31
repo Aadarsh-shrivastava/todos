@@ -1,14 +1,8 @@
-.listitem-picture{
-    border-radius: 30px;
-    height: 30px;
-    width: 30px;
-}
-
-.listitem-name{
+.Listitem_name{
     margin-left: 10px;
 }
 
-.listitem-container{
+.Listitem-container{
     align-items: center;
     border: 1px transparent solid;
     border-radius: 5px;
@@ -17,17 +11,18 @@
     font-size: 12px;
     justify-content: space-between;
     margin: 5px;    
+    padding: 10px;
 }
 
-.listitem-container.selected{
+.Listitem-container.selected{
     background-color: #f6d6cd;
 }
 
-.listitem-container:hover{
+.Listitem-container:hover{
     border: 1px #f6d6cd solid;    
 }
 
-.listitem-count{
+.Listitem_count{
     align-content: center;
     height: 30px;
     width: 30px;

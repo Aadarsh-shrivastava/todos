@@ -3,13 +3,12 @@ interface horizontalLineInterface {
   thickness: number;
   color?: string;
 }
-function HorizontalLine({ thickness, color }: horizontalLineInterface) {
+
+export function HorizontalLine({ thickness, color }: horizontalLineInterface) {
   return (
     <div
       className="horizontal-line"
       style={{ backgroundColor: color, height: `${thickness}px` }}
-    ></div>
+    />
   );
 }
-
-export default HorizontalLine;

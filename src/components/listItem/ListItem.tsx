@@ -5,15 +5,14 @@ interface ListItemInterface {
   list: List;
   isSelected: boolean;
 }
-function ListItem({ list, isSelected }: ListItemInterface) {
+
+export function ListItem({ list, isSelected }: ListItemInterface) {
   return (
-    <div className={`listitem-container ${isSelected ? "selected" : ""}`}>
-      <div className="listitem-name">{list.name}</div>
-      <div className="listitem-count">
+    <div className={`Listitem-container ${isSelected ? "selected" : ""}`}>
+      <div className="Listitem-name">{list.name}</div>
+      <div className="Listitem-count">
         <span>{list.taskCount}</span>
       </div>
     </div>
   );
 }
-
-export default ListItem;
