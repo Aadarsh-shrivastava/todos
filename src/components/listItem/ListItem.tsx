@@ -7,20 +7,8 @@ interface ListItemInterface {
 }
 function ListItem({ list, isSelected }: ListItemInterface) {
   return (
-    <div className="listitem-container">
-      <div className="listitem-section">
-        <img
-          alt="listitem-picture"
-          className="listitem-picture"
-          src={list.icon}
-        />
-        <div
-          className="listitem-name"
-          style={isSelected ? { color: "green" } : { color: "black" }}
-        >
-          {list.name}
-        </div>
-      </div>
+    <div className={`listitem-container ${isSelected ? "selected" : ""}`}>
+      <div className="listitem-name">{list.name}</div>
       <div className="listitem-count">
         <span>{list.taskCount}</span>
       </div>

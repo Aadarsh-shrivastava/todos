@@ -3,19 +3,28 @@
     height: 30px;
     width: 30px;
 }
-.listitem-section{
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+
+.listitem-name{
+    margin-left: 10px;
 }
 
 .listitem-container{
     align-items: center;
+    border: 1px transparent solid;
+    border-radius: 5px;
     display: flex;
     flex-direction: row;
+    font-size: 12px;
     justify-content: space-between;
-    margin: 5px;
+    margin: 5px;    
+}
+
+.listitem-container.selected{
+    background-color: #f6d6cd;
+}
+
+.listitem-container:hover{
+    border: 1px #f6d6cd solid;    
 }
 
 .listitem-count{
