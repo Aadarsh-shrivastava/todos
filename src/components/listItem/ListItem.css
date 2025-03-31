@@ -11,7 +11,14 @@
     font-size: 12px;
     justify-content: space-between;
     margin: 5px;    
-    padding: 10px;
+}
+
+.listitem-container.selected{
+    background-color: #f6d6cd;
+}
+
+.listitem-container:hover{
+    border: 1px #f6d6cd solid;    
 }
 
 .Listitem-container.selected{

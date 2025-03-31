@@ -15,6 +15,7 @@ interface ListsContextProps {
     taskId: number,
     updatedTask: Partial<Task>,
   ) => void;
+  getTasksByListId: (listId: number) => Task[] | undefined;
 }
 
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
@@ -79,6 +80,10 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const getTasksByListId = (listId: number) => {
+    return lists.find((item) => item.id === listId)?.tasks;
+  };
+
   return (
     <ListsContext.Provider
       value={{
@@ -86,6 +91,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
         addTask,
         deleteList,
         deleteTask,
+        getTasksByListId,
         lists,
         updateList,
         updateTask,

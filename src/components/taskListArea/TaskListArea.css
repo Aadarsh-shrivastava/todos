@@ -1,3 +1,14 @@
 .taskListArea{
-    width: 70%;
+    background-color:#f6e5dd;
+    color: #000a;
+    height: 100%;
+    margin: auto;
+    padding:20px ;
+    width: 75%;
+}
+
+.task-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
