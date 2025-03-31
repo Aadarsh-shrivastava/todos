@@ -3,7 +3,9 @@
 :root {
   --background-dark: #000d;
   --background-light: #fff2;
-  --shadow:#0003
+  --shadow:#0003;
+  --black-light:#0003;
+  --black:#000;
 }
 
 *,

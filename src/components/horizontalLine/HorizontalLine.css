@@ -1,4 +1,5 @@
 .horizontal-line{
-    background-color: black;
+    background-color: var(--black-light);
+    height: 2px;
     width: 96%;
 }

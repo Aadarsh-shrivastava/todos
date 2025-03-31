@@ -1,6 +1,6 @@
 /* classes */
 .sidebar-container{
-    border: 1px #0003 solid;
+    border: 1px var(--black-light) solid;
     box-shadow: 4px 0px 2px var(--shadow);
     display: flex;
     flex-direction: column;

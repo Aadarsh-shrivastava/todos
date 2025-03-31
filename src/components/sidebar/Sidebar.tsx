@@ -10,7 +10,7 @@ export function Sidebar() {
       <div>
         <SidebarHeader />
         <Lists />
-        <HorizontalLine color="#0002" thickness={1} />
+        <HorizontalLine />
       </div>
       <AddListButton />
     </aside>
