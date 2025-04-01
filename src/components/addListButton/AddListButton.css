@@ -1,0 +1,17 @@
+.addlist-button{
+    align-self: center;
+    border: 1px var(--black-light) solid;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding:10px 20px;
+    pointer-events:painted;
+    position: relative;
+    width: fit-content;
+}
+.addlist-button:active{
+    border: none;
+}
+
+.addlist-button:hover{
+    background-color: #debaae;
+}

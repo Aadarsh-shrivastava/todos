@@ -1,0 +1,30 @@
+.Listitem_name{
+    margin-left: 10px;
+}
+
+.Listitem-container{
+    align-items: center;
+    border: 1px transparent solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    justify-content: space-between;
+    margin: 5px;    
+    padding: 10px;
+}
+
+.Listitem-container.selected{
+    background-color: #f6d6cd;
+}
+
+.Listitem-container:hover{
+    border: 1px #f6d6cd solid;    
+}
+
+.Listitem_count{
+    align-content: center;
+    height: 30px;
+    width: 30px;
+    
+}

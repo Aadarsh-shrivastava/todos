@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { List } from "../types/List";
 import { Task } from "../types/Task";
+import { DefaultLists } from "../data/tasks";
 
 interface ListsContextProps {
   addList: (list: List) => void;
@@ -19,7 +20,7 @@ interface ListsContextProps {
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lists, setLists] = useState<List[]>([]);
+  const [lists, setLists] = useState<List[]>(DefaultLists);
 
   const addList = (list: List) => {
     setLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
