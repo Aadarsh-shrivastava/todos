@@ -4,22 +4,22 @@ import { Task } from "../types/Task";
 import { DefaultLists } from "../data/tasks";
 
 interface ListsContextProps {
-  currentListId: number | null | undefined;
+  currentListId: number | string | null | undefined;
   setCurrentListId: React.Dispatch<
-    React.SetStateAction<number | null | undefined>
+    React.SetStateAction<number | string | null | undefined>
   >;
   addList: (list: List) => void;
-  addTask: (listId: number, task: Task) => void;
-  deleteList: (id: number) => void;
-  deleteTask: (listId: number, taskId: number) => void;
+  addTask: (listId: number | string, task: Task) => void;
+  deleteList: (id: number | string) => void;
+  deleteTask: (listId: number | string, taskId: number | string) => void;
   lists: List[];
-  updateList: (id: number, updatedList: Partial<List>) => void;
+  updateList: (id: number | string, updatedList: Partial<List>) => void;
   updateTask: (
-    listId: number,
-    taskId: number,
+    listId: number | string,
+    taskId: number | string,
     updatedTask: Partial<Task>,
   ) => void;
-  getListByListId: (listId: number) => List | undefined;
+  getListByListId: (listId: number | string) => List | undefined;
 }
 
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
@@ -27,14 +27,14 @@ const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>(DefaultLists);
   const [currentListId, setCurrentListId] = useState<
-    number | null | undefined
+    number | string | null | undefined
   >();
 
   const addList = (list: List) => {
     setLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
   };
 
-  const updateList = (id: number, updatedList: Partial<List>) => {
+  const updateList = (id: number | string, updatedList: Partial<List>) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === id
@@ -44,21 +44,21 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const deleteList = (id: number) => {
+  const deleteList = (id: number | string) => {
     setLists((prevLists) => prevLists.filter((list) => list.id !== id));
   };
 
-  const addTask = (listId: number, task: Task) => {
+  const addTask = (listId: number | string, task: Task) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
-        list.id === listId ? { ...list, tasks: [...list.tasks, task] } : list,
+        list.id === listId ? { ...list, tasks: [task, ...list.tasks] } : list,
       ),
     );
   };
 
   const updateTask = (
-    listId: number,
-    taskId: number,
+    listId: number | string,
+    taskId: number | string,
     updatedTask: Partial<Task>,
   ) => {
     setLists((prevLists) =>
@@ -77,7 +77,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const deleteTask = (listId: number, taskId: number) => {
+  const deleteTask = (listId: number | string, taskId: number | string) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
@@ -87,7 +87,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const getListByListId = (listId: number) => {
+  const getListByListId = (listId: number | string) => {
     return lists.find((item) => item.id === listId) ?? undefined;
   };
 

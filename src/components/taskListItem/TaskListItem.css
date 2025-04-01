@@ -1,8 +1,8 @@
 .task-list-item{
     align-content: center;
     align-items: center;
-    background-color: #f6d6cd;
-    border: 1px #0003 solid;
+    background-color: var(--primary-peach);
+    border: 1px var(--black-light) solid;
     border-radius: 5px;
     display: flex;
     gap: 10px;
@@ -31,7 +31,7 @@
   }
   
   .checkbox.checked {
-    background-color: #f6e5dd;
+    background-color: var(--primary-peach);
   }
 
   .button-icon{
@@ -41,3 +41,16 @@
   .strikethrough{
     text-decoration: line-through;
   }
+
+.editable-task-input {
+  background: transparent; /* Remove background */
+  border: none; /* Remove border */
+  color: inherit; /* Inherit text color */
+  font-family: inherit; /* Use the same font as the parent */
+  font-size: 16px;
+  min-width: 120px;
+  outline: none; /* Remove outline */
+  padding: 0;
+  transition: background-color 0.3s ease; /* Smooth transition */
+  width: auto;
+}

@@ -1,0 +1,24 @@
+.fab-button {
+    background-color: var(--background-peach);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 24px;
+    height: 50px;
+    margin: 10px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    width: 50px;
+    z-index: 1000;
+  }
+  
+  .fab-button:hover {
+    background-color: var(--primary-peach);
+  }
+  
+  .fab-button:active {
+    box-shadow: none;
+    outline: none;
+  }
+  

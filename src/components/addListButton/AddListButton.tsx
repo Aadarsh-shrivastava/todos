@@ -1,8 +1,12 @@
 import "./AddListButton.css";
 
-export function AddListButton() {
+interface AddListButtonInterface {
+  onClick: () => void;
+}
+
+export function AddListButton({ onClick }: AddListButtonInterface) {
   return (
-    <div className="addlist-button">
+    <div className="addlist-button" onClick={onClick}>
       <p>Add List</p>
     </div>
   );

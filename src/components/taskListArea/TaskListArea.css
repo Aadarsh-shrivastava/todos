@@ -1,6 +1,6 @@
 .taskListArea{
-    background-color:#f6e5dd;
-    color: #000a;
+    background-color:var(--background-peach);
+    color: var(--black);
     height: 100%;
     margin: auto;
     padding:20px ;
@@ -28,4 +28,9 @@
 .menu-icon{
     height: 40px;
     width: 40px;
+}
+
+.alt-message{
+    font-size: larger;
+    margin: auto;
 }

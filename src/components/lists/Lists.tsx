@@ -3,9 +3,11 @@ import { ListItem } from "../listItem/ListItem";
 
 export function Lists() {
   const { lists, currentListId, setCurrentListId } = useLists();
-  const handleClick = (id: number) => {
+
+  const handleClick = (id: number | string) => {
     setCurrentListId(id);
   };
+
   return (
     <div className="list-container">
       {lists.map((list) => (

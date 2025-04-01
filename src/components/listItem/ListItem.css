@@ -1,5 +1,5 @@
-.Listitem_name{
-    margin-left: 10px;
+.Listitem-name{
+    font-size: large;
 }
 
 .Listitem-container{
@@ -8,18 +8,17 @@
     border-radius: 5px;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
     justify-content: space-between;
     margin: 5px;    
     padding: 10px;
 }
 
 .Listitem-container.selected{
-    background-color: #f6d6cd;
+    background-color: var(--primary-peach);
 }
 
 .Listitem-container:hover{
-    border: 1px #f6d6cd solid;    
+    border: 1px var(--primary-peach) solid;    
 }
 
 .Listitem_count{
@@ -27,4 +26,20 @@
     height: 30px;
     width: 30px;
     
+}
+
+.Listitem-icon{
+    height: 20px;
+    width:  20px;
+}
+
+.editable-task-input {
+  background: transparent; /* Remove background */
+  border: none; /* Remove border */
+  color: inherit; /* Inherit text color */
+  font-family: inherit; /* Use the same font as the parent */
+  font-size: large;
+  outline: none; /* Remove outline */
+  padding: 0;
+  transition: background-color 0.3s ease; /* Smooth transition */width:fit-content ;
 }
