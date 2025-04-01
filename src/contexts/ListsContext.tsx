@@ -4,6 +4,10 @@ import { Task } from "../types/Task";
 import { DefaultLists } from "../data/tasks";
 
 interface ListsContextProps {
+  currentListId: number | null | undefined;
+  setCurrentListId: React.Dispatch<
+    React.SetStateAction<number | null | undefined>
+  >;
   addList: (list: List) => void;
   addTask: (listId: number, task: Task) => void;
   deleteList: (id: number) => void;
@@ -15,13 +19,16 @@ interface ListsContextProps {
     taskId: number,
     updatedTask: Partial<Task>,
   ) => void;
-  getTasksByListId: (listId: number) => Task[] | undefined;
+  getListByListId: (listId: number) => List | undefined;
 }
 
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>(DefaultLists);
+  const [currentListId, setCurrentListId] = useState<
+    number | null | undefined
+  >();
 
   const addList = (list: List) => {
     setLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
@@ -80,8 +87,8 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const getTasksByListId = (listId: number) => {
-    return lists.find((item) => item.id === listId)?.tasks;
+  const getListByListId = (listId: number) => {
+    return lists.find((item) => item.id === listId) ?? undefined;
   };
 
   return (
@@ -89,10 +96,12 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         addList,
         addTask,
+        currentListId,
         deleteList,
         deleteTask,
-        getTasksByListId,
+        getListByListId,
         lists,
+        setCurrentListId,
         updateList,
         updateTask,
       }}

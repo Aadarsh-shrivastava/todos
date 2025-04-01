@@ -8,7 +8,7 @@ export function HomePage() {
     <ListsProvider>
       <div className="HomePage">
         <Sidebar />
-        <TaskListArea listId={1} />
+        <TaskListArea />
       </div>
     </ListsProvider>
   );

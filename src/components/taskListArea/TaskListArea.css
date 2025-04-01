@@ -12,3 +12,20 @@
     flex-direction: column;
     gap: 5px;
 }
+
+.header{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin:10px ;
+    width: 100%;
+}
+
+.header-title{
+    font-size: 40px;
+}
+
+.menu-icon{
+    height: 40px;
+    width: 40px;
+}
