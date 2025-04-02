@@ -31,7 +31,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   >();
 
   const addList = (list: List) => {
-    setLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
+    setLists((prevLists) => [{ ...list, tasks: [] }, ...prevLists]);
   };
 
   const updateList = (id: number | string, updatedList: Partial<List>) => {
@@ -51,7 +51,13 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const addTask = (listId: number | string, task: Task) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
-        list.id === listId ? { ...list, tasks: [task, ...list.tasks] } : list,
+        list.id === listId
+          ? {
+              ...list,
+              taskCount: list.taskCount + 1,
+              tasks: [task, ...list.tasks],
+            }
+          : list,
       ),
     );
   };
@@ -81,7 +87,11 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
-          ? { ...list, tasks: list.tasks.filter((task) => task.id !== taskId) }
+          ? {
+              ...list,
+              taskCount: list.taskCount - 1,
+              tasks: list.tasks.filter((task) => task.id !== taskId),
+            }
           : list,
       ),
     );

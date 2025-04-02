@@ -27,7 +27,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'no-console': ['warn'],
-      'prettier/prettier': 'error',
+      // 'prettier/prettier': 'error',
       "sort-keys": ["error", "asc", { "caseSensitive": true, "natural": false, "minKeys": 2 }],
       'sort-keys-fix/sort-keys-fix': 'error',
       "react/jsx-sort-props": [

@@ -1,56 +1,57 @@
-.task-list-item{
-    align-content: center;
-    align-items: center;
-    background-color: var(--primary-peach);
-    border: 1px var(--black-light) solid;
-    border-radius: 5px;
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    padding: 10px;
+.task-list-item {
+  align-content: center;
+  align-items: center;
+  background-color: var(--primary-peach);
+  border: 1px var(--black-light) solid;
+  border-radius: 5px;
+  display: flex;
+  gap: 10px;
+  /* justify-content: space-between; */
+  padding: 10px;
 }
 
-.list-item-title-checkbox{
+.list-item-title-checkbox {
   align-items: center;
   display: flex;
   gap: 10px;
   justify-content: space-evenly;
+  width: 100%;
 }
-.checkbox{
-    border-radius: 50%;
-    height: 15px;
-    width: 15px;
+.checkbox {
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
 }
 
 .checkbox {
-    border: 1px #9e877d solid;
-    cursor: pointer;
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-  }
-  
-  .checkbox.checked {
-    background-color: var(--primary-peach);
-  }
+  border: 1px #9e877d solid;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 20px;
+  min-width: 20px;
+}
 
-  .button-icon{
-    height: 20px;
-    width: 20px;
-  }
-  .strikethrough{
-    text-decoration: line-through;
-  }
+.checkbox.checked {
+  background-color: var(--primary-peach);
+}
+
+.button-icon {
+  height: 20px;
+  width: 20px;
+}
+.strikethrough {
+  text-decoration: line-through;
+}
 
 .editable-task-input {
-  background: transparent; /* Remove background */
-  border: none; /* Remove border */
-  color: inherit; /* Inherit text color */
-  font-family: inherit; /* Use the same font as the parent */
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
   font-size: 16px;
-  min-width: 120px;
-  outline: none; /* Remove outline */
+  min-width: 0;
+  outline: none;
   padding: 0;
   transition: background-color 0.3s ease; /* Smooth transition */
-  width: auto;
+  width: 100%;
 }

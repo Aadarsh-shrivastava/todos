@@ -1,8 +1,8 @@
-import "./ListItem.css";
 import { List } from "../../types/List";
 import bin from "../../assets/bin.svg";
 import { useLists } from "../../contexts/ListsContext";
 import { useEffect, useRef, useState } from "react";
+import "./ListItem.css";
 interface ListItemInterface {
   list: List;
   isSelected: boolean;
@@ -24,7 +24,8 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
   };
 
   const handleSave = () => {
-    updateList(list.id, { ...list, name: newListName });
+    if (newListName.length > 0)
+      updateList(list.id, { ...list, name: newListName });
     setIsEditing(false);
   };
 
@@ -61,7 +62,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
       {isEditing ? (
         <input
           autoFocus
-          className="editable-task-input"
+          className="editable-list-input"
           ref={inputRef}
           type="text"
           value={newListName}
@@ -70,10 +71,8 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
           onKeyDown={(e) => e.key === "Enter" && handleSave()}
         />
       ) : (
-        <span
-          onClick={handleEdit} // Enable editing on click
-        >
-          {list.name}
+        <span onClick={handleEdit}>
+          {list.name} ({list.taskCount})
         </span>
       )}
       <div className="Listitem-count">

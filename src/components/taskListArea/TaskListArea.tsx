@@ -1,13 +1,18 @@
 import { useLists } from "../../contexts/ListsContext";
 import { List } from "../../types/List";
 import { Task } from "../../types/Task";
-import TaskListItem from "../taskListItem/TaskListItem";
+import { TaskListItem, TaskListItemHandle } from "../taskListItem/TaskListItem";
 import { AddTaskButton } from "../addTaskButton/AddTaskButon";
 import "./TaskListArea.css";
+import { useEffect, useRef } from "react";
 
 export function TaskListArea() {
   const { getListByListId, currentListId, deleteTask, updateTask, addTask } =
     useLists();
+
+  const tasksRef = useRef<Map<string | number, TaskListItemHandle | null>>(
+    new Map(),
+  );
 
   const list: List | undefined = currentListId
     ? getListByListId(currentListId)
@@ -21,6 +26,18 @@ export function TaskListArea() {
   const handleUpdate = (taskId: number | string, task: Partial<Task>) => {
     if (list) updateTask(list?.id, taskId, task);
   };
+
+  // Effect to auto-focus the latest added task
+  useEffect(() => {
+    if (list?.tasks.length) {
+      const lastTask = list.tasks[list.tasks.length - 1];
+      const taskElement = tasksRef.current.get(lastTask.id);
+      if (taskElement) {
+        taskElement.focusInput();
+        console.log(taskElement, lastTask);
+      }
+    }
+  }, [list?.tasks]);
 
   const addNewTask = () => {
     const newTask: Task = {
@@ -52,6 +69,13 @@ export function TaskListArea() {
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
                 key={task.id}
+                ref={(el) => {
+                  if (el) {
+                    tasksRef.current.set(task.id, el);
+                  } else {
+                    tasksRef.current.delete(task.id);
+                  }
+                }}
                 task={task}
               />
             ))}

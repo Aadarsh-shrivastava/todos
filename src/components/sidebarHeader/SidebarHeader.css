@@ -1,18 +1,16 @@
-.profile-name{
-    font-size: large;
-    margin: 10px;
+.profile-name {
+  font-size: larger;
+  font-style: oblique;
+  font-weight: bold;
+  margin: 10px;
 }
 
-.navigation-container{
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 5px;
-}
-
-.search-icon{
-    height: 30px;
-    width: 30px;
+.navigation-container {
+  align-content: center;
+  align-items: center;
+  /* background-color: var(--header-peach); */
+  border: 1px var(--black-light) solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

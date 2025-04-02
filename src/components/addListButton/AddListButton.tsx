@@ -7,7 +7,7 @@ interface AddListButtonInterface {
 export function AddListButton({ onClick }: AddListButtonInterface) {
   return (
     <div className="addlist-button" onClick={onClick}>
-      <p>Add List</p>
+      <p className="title">Add List</p>
     </div>
   );
 }
