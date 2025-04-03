@@ -1,8 +1,17 @@
 .taskListArea {
   background-color: var(--background-peach);
   color: var(--black);
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
   padding: 20px;
-  width: 75%;
+  padding: 20px;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.Sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .task-list {

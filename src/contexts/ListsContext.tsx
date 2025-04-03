@@ -1,54 +1,60 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { List } from "../types/List";
 import { Task } from "../types/Task";
-import { DefaultLists } from "../data/tasks";
+import { Id } from "../types/Id";
 
 interface ListsContextProps {
-  currentListId: number | string | null | undefined;
-  setCurrentListId: React.Dispatch<
-    React.SetStateAction<number | string | null | undefined>
-  >;
+  currentListId: Id | null | undefined;
+  updateCurrentListId: (id: Id | null) => void;
   addList: (list: List) => void;
-  addTask: (listId: number | string, task: Task) => void;
-  deleteList: (id: number | string) => void;
-  deleteTask: (listId: number | string, taskId: number | string) => void;
+  addTask: (listId: Id, task: Task) => void;
+  deleteList: (id: Id) => void;
+  deleteTask: (listId: Id, taskId: Id) => void;
   lists: List[];
-  updateList: (id: number | string, updatedList: Partial<List>) => void;
-  updateTask: (
-    listId: number | string,
-    taskId: number | string,
-    updatedTask: Partial<Task>,
-  ) => void;
-  getListByListId: (listId: number | string) => List | undefined;
+  updateList: (id: Id, updatedList: Partial<List>) => void;
+  updateTask: (listId: Id, taskId: Id, updatedTask: Partial<Task>) => void;
+  getListByListId: (listId: Id) => List | undefined;
 }
 
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lists, setLists] = useState<List[]>(DefaultLists);
-  const [currentListId, setCurrentListId] = useState<
-    number | string | null | undefined
-  >();
+  const [lists, setLists] = useState<List[]>(() => {
+    const storedLists = localStorage.getItem("lists");
+    return storedLists ? JSON.parse(storedLists) : [];
+  });
+
+  const [currentListId, setCurrentListId] = useState<Id | null>(
+    lists.length ? lists[0].id : null
+  );
+
+  useEffect(() => {
+    localStorage.setItem("lists", JSON.stringify(lists));
+  }, [lists]);
+
+  const updateCurrentListId = (id: Id | null) => {
+    setCurrentListId(id);
+  };
 
   const addList = (list: List) => {
     setLists((prevLists) => [{ ...list, tasks: [] }, ...prevLists]);
   };
 
-  const updateList = (id: number | string, updatedList: Partial<List>) => {
+  const updateList = (id: Id, updatedList: Partial<List>) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === id
           ? { ...list, ...updatedList, modifiedAt: new Date() }
-          : list,
-      ),
+          : list
+      )
     );
   };
 
-  const deleteList = (id: number | string) => {
+  const deleteList = (id: Id) => {
     setLists((prevLists) => prevLists.filter((list) => list.id !== id));
   };
 
-  const addTask = (listId: number | string, task: Task) => {
+  const addTask = (listId: Id, task: Task): void => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
@@ -57,16 +63,13 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               taskCount: list.taskCount + 1,
               tasks: [task, ...list.tasks],
             }
-          : list,
-      ),
+          : list
+      )
     );
   };
 
-  const updateTask = (
-    listId: number | string,
-    taskId: number | string,
-    updatedTask: Partial<Task>,
-  ) => {
+  const updateTask = (listId: Id, taskId: Id, updatedTask: Partial<Task>) => {
+    console.log("updatig", updatedTask);
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
@@ -75,15 +78,15 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               tasks: list.tasks.map((task) =>
                 task.id === taskId
                   ? { ...task, ...updatedTask, modifiedAt: new Date() }
-                  : task,
+                  : task
               ),
             }
-          : list,
-      ),
+          : list
+      )
     );
   };
 
-  const deleteTask = (listId: number | string, taskId: number | string) => {
+  const deleteTask = (listId: Id, taskId: Id) => {
     setLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
@@ -92,13 +95,13 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               taskCount: list.taskCount - 1,
               tasks: list.tasks.filter((task) => task.id !== taskId),
             }
-          : list,
-      ),
+          : list
+      )
     );
   };
 
-  const getListByListId = (listId: number | string) => {
-    return lists.find((item) => item.id === listId) ?? undefined;
+  const getListByListId = (listId: Id) => {
+    return lists.find((item) => item.id === listId);
   };
 
   return (
@@ -111,7 +114,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
         deleteTask,
         getListByListId,
         lists,
-        setCurrentListId,
+        updateCurrentListId,
         updateList,
         updateTask,
       }}

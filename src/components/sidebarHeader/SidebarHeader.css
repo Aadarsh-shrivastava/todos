@@ -8,7 +8,6 @@
 .navigation-container {
   align-content: center;
   align-items: center;
-  /* background-color: var(--header-peach); */
   border: 1px var(--black-light) solid;
   display: flex;
   flex-direction: row;

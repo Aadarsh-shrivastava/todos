@@ -1,8 +1,12 @@
 import "./AddTaskButton.css";
 
-export const AddTaskButton = ({ onClick }: { onClick: () => void }) => {
+interface AddTaskButton {
+  onAddTaskClick: () => void;
+}
+
+export const AddTaskButton = ({ onAddTaskClick }: AddTaskButton) => {
   return (
-    <button className="fab-button" onClick={onClick}>
+    <button className="fab-button" onClick={onAddTaskClick}>
       +
     </button>
   );

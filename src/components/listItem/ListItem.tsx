@@ -3,6 +3,7 @@ import bin from "../../assets/bin.svg";
 import { useLists } from "../../contexts/ListsContext";
 import { useEffect, useRef, useState } from "react";
 import "./ListItem.css";
+
 interface ListItemInterface {
   list: List;
   isSelected: boolean;
@@ -24,8 +25,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
   };
 
   const handleSave = () => {
-    if (newListName.length > 0)
-      updateList(list.id, { ...list, name: newListName });
+    if (newListName.length) updateList(list.id, { ...list, name: newListName });
     setIsEditing(false);
   };
 
@@ -33,8 +33,8 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
     setNewListName(e.target.value);
   };
 
-  const handleBlur = () => {
-    if (newListName !== list.name) {
+  const handleBlur = (name: string) => {
+    if (newListName !== name) {
       handleSave();
     } else {
       setIsEditing(false);
@@ -47,7 +47,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
       ) {
-        handleBlur();
+        handleBlur(list.name);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -59,25 +59,30 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
 
   return (
     <div className={`Listitem-container ${isSelected ? "selected" : ""}`}>
-      {isEditing ? (
-        <input
-          autoFocus
-          className="editable-list-input"
-          ref={inputRef}
-          type="text"
-          value={newListName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onKeyDown={(e) => e.key === "Enter" && handleSave()}
-        />
-      ) : (
-        <span onClick={handleEdit}>
-          {list.name} ({list.taskCount})
-        </span>
-      )}
-      <div className="Listitem-count">
-        <img className="Listitem-icon" src={bin} onClick={handleDelete} />
+      <div className="Listitem-name-count">
+        <div className="Listitem-name">
+          {isEditing ? (
+            <input
+              autoFocus
+              className="editable-list-input unselectable"
+              ref={inputRef}
+              type="text"
+              value={newListName}
+              onBlur={() => handleBlur(list.name)}
+              onChange={handleChange}
+              onKeyDown={(e) => e.key === "Enter" && handleSave()}
+            />
+          ) : (
+            <div className="Listitem-name unselectable" onClick={handleEdit}>
+              {list.name}
+            </div>
+          )}
+        </div>
+        <div className="Listitem-count unselectable" onClick={handleEdit}>
+          ({list.taskCount})
+        </div>
       </div>
+      <img className="Listitem-icon" src={bin} onClick={handleDelete} />
     </div>
   );
 }

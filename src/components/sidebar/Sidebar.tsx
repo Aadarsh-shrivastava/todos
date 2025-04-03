@@ -8,7 +8,7 @@ import "./Sidebar.css";
 export function Sidebar() {
   const { addList } = useLists();
 
-  const handleAddList = () => {
+  const handleAddList = (addList: (list: List) => void) => {
     const newList: List = {
       createdAt: new Date(),
       id: crypto.randomUUID(),
@@ -26,7 +26,7 @@ export function Sidebar() {
         <SidebarHeader />
         <Lists />
       </div>
-      <AddListButton onClick={handleAddList} />
+      <AddListButton onAddListClick={() => handleAddList(addList)} />
     </aside>
   );
 }
