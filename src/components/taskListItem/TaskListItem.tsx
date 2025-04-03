@@ -73,7 +73,7 @@ export const TaskListItem = ({
         <div className="task-list-buttons">
           <img
             alt="Delete task"
-            className="button-icon"
+            className="button-icon unselectable"
             src={bin}
             onClick={() => handleDelete(task.id)}
           />

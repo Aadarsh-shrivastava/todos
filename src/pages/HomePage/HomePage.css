@@ -1,6 +1,7 @@
 .HomePage {
   background-color: var(--background-light);
   display: flex;
+  justify-content:flex-end ;
   min-height: 100vh;
   overflow: hidden;
   width: 100%;

@@ -2,7 +2,7 @@
   background-color: var(--background-peach);
   border: none;
   border-radius: 50%;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 4px 1px var(--primary-peach);
   cursor: pointer;
   font-size: 24px;
   height: 50px;

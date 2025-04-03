@@ -38,13 +38,16 @@ export function TaskListArea() {
     <div className="taskListArea">
       {!currentListId ? (
         <div className="alt-message">
-          <p>Oops!!! there are no tasks here , go to a list</p>
+          <p> Oops!!! there are no tasks here , go to a list </p>
         </div>
       ) : (
         <>
-          <div className="header">
-            <span className="header-title">{list?.name}</span>
-            <AddTaskButton onAddTaskClick={() => addNewTask(list)} />
+          <div className="headers">
+            <div className={`title`}>TO DO</div>
+            <div className="header">
+              <span className="header-title unselectable">{list?.name}</span>
+              <AddTaskButton onAddTaskClick={() => addNewTask(list)} />
+            </div>
           </div>
           <div className="task-list">
             {list?.tasks.map((task: Task) => (
