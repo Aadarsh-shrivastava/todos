@@ -1,8 +1,8 @@
 .fab-button {
-  background-color: var(--background-peach);
+  background-color: var(--primary-peach);
   border: none;
+  border: 1px var(--black-light) solid;
   border-radius: 50%;
-  box-shadow: -4px 4px 1px var(--primary-peach);
   cursor: pointer;
   font-size: 24px;
   height: 50px;

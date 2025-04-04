@@ -34,7 +34,7 @@
 }
 
 .title {
-  color: var(--white);
+  color: var(--black);
   font-size: large;
   font-weight: bolder;
   padding-top: 30px;
@@ -71,15 +71,18 @@
   .taskListArea {
     width: 75%;
   }
+
   .title {
     display: none;
   }
+
   .headers {
     left: 25%;
     margin-bottom: 10px;
     right: 0px;
     width: 75%;
   }
+
   .task-list {
     margin-top: 80px;
   }

@@ -18,10 +18,10 @@
 }
 
 .menu-button {
-  background-color: var(--background-peach);
+  background-color: var(--primary-peach);
+  border: 1px var(--black-light) solid;
   border-radius: 10px;
-  box-shadow: -4px 4px 1px var(--primary-peach);
-  color: white;
+  color: black;
   cursor: pointer;
   font-size: 20px;
   left: 15px;
