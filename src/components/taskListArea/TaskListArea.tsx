@@ -20,18 +20,22 @@ export function TaskListArea() {
   };
 
   const handleUpdate = (taskId: Id, task: Partial<Task>) => {
-    if (list) updateTask(list?.id, taskId, task);
+    if (list) {
+      updateTask(list?.id, taskId, task);
+    }
   };
 
   const addNewTask = (list: List | null | undefined) => {
-    const newTask: Task = {
-      createdAt: new Date(),
-      id: crypto.randomUUID(),
-      isDone: false,
-      modifiedAt: new Date(),
-      name: "new task",
-    };
-    if (list) addTask(list?.id, newTask);
+    if (list) {
+      const newTask: Task = {
+        createdAt: new Date(),
+        id: crypto.randomUUID(),
+        isDone: false,
+        modifiedAt: new Date(),
+        name: "new task",
+      };
+      addTask(list?.id, newTask);
+    }
   };
 
   return (

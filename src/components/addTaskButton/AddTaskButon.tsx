@@ -1,10 +1,10 @@
 import "./AddTaskButton.css";
 
-interface AddTaskButton {
+interface AddTaskButtonProps {
   onAddTaskClick: () => void;
 }
 
-export const AddTaskButton = ({ onAddTaskClick }: AddTaskButton) => {
+export const AddTaskButton = ({ onAddTaskClick }: AddTaskButtonProps) => {
   return (
     <button className="fab-button" onClick={onAddTaskClick}>
       +

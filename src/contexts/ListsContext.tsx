@@ -5,7 +5,7 @@ import { Id } from "../types/Id";
 
 interface ListsContextProps {
   currentListId: Id | null | undefined;
-  updateCurrentListId: (id: Id | null) => void;
+  updateCurrentListId: (id: Id | undefined) => void;
   addList: (list: List) => void;
   addTask: (listId: Id, task: Task) => void;
   deleteList: (id: Id) => void;
@@ -19,44 +19,60 @@ interface ListsContextProps {
 const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lists, setLists] = useState<List[]>(() => {
-    const storedLists = localStorage.getItem("lists");
-    return storedLists ? JSON.parse(storedLists) : [];
-  });
+  const [lists, setLists] = useState<List[]>([]);
 
-  const [currentListId, setCurrentListId] = useState<Id | null>(
-    lists.length ? lists[0].id : null
+  const [currentListId, setCurrentListId] = useState<Id | undefined>(
+    lists?.[0].id
   );
 
   useEffect(() => {
-    localStorage.setItem("lists", JSON.stringify(lists));
-  }, [lists]);
+    const storedLists = localStorage.getItem("lists");
+    setLists(() => {
+      const updatedList = storedLists ? JSON.parse(storedLists) : [];
+      setCurrentListId(updatedList.length ? updatedList[0].id : null);
+      return updatedList;
+    });
+  }, []);
 
-  const updateCurrentListId = (id: Id | null) => {
+  const saveToLocalStorage = (updatedLists: List[]) => {
+    localStorage.setItem("lists", JSON.stringify(updatedLists));
+  };
+
+  const updateCurrentListId = (id: Id | undefined) => {
     setCurrentListId(id);
   };
 
   const addList = (list: List) => {
-    setLists((prevLists) => [{ ...list, tasks: [] }, ...prevLists]);
+    setLists((prevLists) => {
+      const updatedLists = [{ ...list, tasks: [] }, ...prevLists];
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const updateList = (id: Id, updatedList: Partial<List>) => {
-    setLists((prevLists) =>
-      prevLists.map((list) =>
+    setLists((prevLists) => {
+      const updatedLists = prevLists.map((list) =>
         list.id === id
           ? { ...list, ...updatedList, modifiedAt: new Date() }
           : list
-      )
-    );
+      );
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const deleteList = (id: Id) => {
-    setLists((prevLists) => prevLists.filter((list) => list.id !== id));
+    setLists((prevLists) => {
+      const updatedLists = prevLists.filter((list) => list.id !== id);
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const addTask = (listId: Id, task: Task): void => {
-    setLists((prevLists) =>
-      prevLists.map((list) =>
+    setLists((prevLists) => {
+      const updatedLists = prevLists.map((list) =>
         list.id === listId
           ? {
               ...list,
@@ -64,14 +80,15 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               tasks: [task, ...list.tasks],
             }
           : list
-      )
-    );
+      );
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const updateTask = (listId: Id, taskId: Id, updatedTask: Partial<Task>) => {
-    console.log("updatig", updatedTask);
-    setLists((prevLists) =>
-      prevLists.map((list) =>
+    setLists((prevLists) => {
+      const updatedLists = prevLists.map((list) =>
         list.id === listId
           ? {
               ...list,
@@ -82,13 +99,15 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               ),
             }
           : list
-      )
-    );
+      );
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const deleteTask = (listId: Id, taskId: Id) => {
-    setLists((prevLists) =>
-      prevLists.map((list) =>
+    setLists((prevLists) => {
+      const updatedLists = prevLists.map((list) =>
         list.id === listId
           ? {
               ...list,
@@ -96,8 +115,10 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
               tasks: list.tasks.filter((task) => task.id !== taskId),
             }
           : list
-      )
-    );
+      );
+      saveToLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const getListByListId = (listId: Id) => {

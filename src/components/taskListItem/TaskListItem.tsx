@@ -25,7 +25,6 @@ export const TaskListItem = ({
 
   const handleCheck = (taskId: Id, isChecked: boolean) => {
     handleUpdate(taskId, { isDone: !isChecked });
-    handleUpdate(taskId, {});
   };
 
   const handleSave = (newTaskName: string, task: Task) => {
@@ -56,9 +55,11 @@ export const TaskListItem = ({
               value={newTaskName}
               onBlur={() => handleSave(newTaskName, task)}
               onChange={(e) => setNewTaskName(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && handleSave(newTaskName, task)
-              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSave(newTaskName, task);
+                }
+              }}
             />
           ) : (
             <span

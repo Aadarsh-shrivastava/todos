@@ -76,7 +76,11 @@
   }
   .headers {
     left: 25%;
+    margin-bottom: 10px;
     right: 0px;
     width: 75%;
+  }
+  .task-list {
+    margin-top: 80px;
   }
 }
