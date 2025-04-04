@@ -22,16 +22,15 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>([]);
 
   const [currentListId, setCurrentListId] = useState<Id | undefined>(
-    lists?.[0].id
+    lists?.[0]?.id
   );
 
   useEffect(() => {
     const storedLists = localStorage.getItem("lists");
-    setLists(() => {
-      const updatedList = storedLists ? JSON.parse(storedLists) : [];
-      setCurrentListId(updatedList.length ? updatedList[0].id : null);
-      return updatedList;
-    });
+    const updatedList = storedLists ? JSON.parse(storedLists) : [];
+
+    setLists(updatedList);
+    setCurrentListId(updatedList.length ? updatedList[0].id : null);
   }, []);
 
   const saveToLocalStorage = (updatedLists: List[]) => {
