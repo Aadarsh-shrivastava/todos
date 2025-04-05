@@ -3,9 +3,14 @@
 :root {
   --background-dark: #000d;
   --background-light: #fff2;
-  --shadow:#0003;
-  --black-light:#0003;
-  --black:#000;
+  --background-peach: #f6e5dd;
+  --black: #000;
+  --black-light: #0003;
+  --header-peach: #fcf9eb;
+  --primary-peach: #f6d6cd;
+  --secondary-peach: #debaae;
+  --shadow: #0003;
+  --white: #fffbf7;
 }
 
 *,
@@ -43,4 +48,16 @@ html::-webkit-scrollbar {
 /* Hide scrollbar for Firefox */
 html {
   scrollbar-width: none;
+}
+
+.unselectable {
+  user-select: none; /* Prevents text selection */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  cursor: default; /* Optional: Keeps cursor normal */
+}
+
+.hidden {
+  display: none;
 }
