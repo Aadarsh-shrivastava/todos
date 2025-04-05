@@ -4,15 +4,15 @@ import { Task } from "../types/Task";
 import { Id } from "../types/Id";
 
 interface ListsContextProps {
-  currentListId: Id | null | undefined;
+  currentListId: Id | undefined;
   updateCurrentListId: (id: Id | undefined) => void;
   addList: (list: List) => void;
   addTask: (listId: Id, task: Task) => void;
   deleteList: (id: Id) => void;
   deleteTask: (listId: Id, taskId: Id) => void;
   lists: List[];
-  updateList: (id: Id, updatedList: Partial<List>) => void;
-  updateTask: (listId: Id, taskId: Id, updatedTask: Partial<Task>) => void;
+  updateList: (updatedList: Partial<List>) => void;
+  updateTask: (listId: Id, updatedTask: Partial<Task>) => void;
   getListByListId: (listId: Id) => List | undefined;
 }
 
@@ -49,10 +49,10 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const updateList = (id: Id, updatedList: Partial<List>) => {
+  const updateList = (updatedList: Partial<List>) => {
     setLists((prevLists) => {
       const updatedLists = prevLists.map((list) =>
-        list.id === id
+        list.id === updatedList.id
           ? { ...list, ...updatedList, modifiedAt: new Date() }
           : list
       );
@@ -85,14 +85,14 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const updateTask = (listId: Id, taskId: Id, updatedTask: Partial<Task>) => {
+  const updateTask = (listId: Id, updatedTask: Partial<Task>) => {
     setLists((prevLists) => {
       const updatedLists = prevLists.map((list) =>
         list.id === listId
           ? {
               ...list,
               tasks: list.tasks.map((task) =>
-                task.id === taskId
+                task.id === updatedTask.id
                   ? { ...task, ...updatedTask, modifiedAt: new Date() }
                   : task
               ),

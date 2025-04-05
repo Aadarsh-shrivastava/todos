@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { Task } from "../../types/Task";
 import bin from "../../assets/bin.svg";
 import "./TaskListItem.css";
-import { Id } from "../../types/Id";
 
 export interface TaskListItemHandle {
   focusInput: () => void;
@@ -11,7 +10,7 @@ export interface TaskListItemHandle {
 interface TaskListItemProps {
   task: Task;
   handleDelete: (taskId: string | number) => void;
-  handleUpdate: (taskId: string | number, task: Partial<Task>) => void;
+  handleUpdate: (task: Partial<Task>) => void;
 }
 
 export const TaskListItem = ({
@@ -23,13 +22,13 @@ export const TaskListItem = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCheck = (taskId: Id, isChecked: boolean) => {
-    handleUpdate(taskId, { isDone: !isChecked });
+  const handleCheck = (isChecked: boolean) => {
+    handleUpdate({ id: task.id, isDone: !isChecked });
   };
 
   const handleSave = (newTaskName: string, task: Task) => {
     if (newTaskName.trim()) {
-      handleUpdate(task.id, { ...task, name: newTaskName });
+      handleUpdate({ id: task.id, name: newTaskName });
     } else {
       setNewTaskName(task.name);
     }
@@ -43,7 +42,7 @@ export const TaskListItem = ({
           checked={task.isDone}
           className="checkbox"
           type="checkbox"
-          onChange={() => handleCheck(task.id, task.isDone)}
+          onChange={() => handleCheck(task.isDone)}
         />
         <div className="input-container" onClick={() => setIsEditing(true)}>
           {isEditing ? (

@@ -25,7 +25,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
   };
 
   const handleSave = () => {
-    if (newListName.length) updateList(list.id, { ...list, name: newListName });
+    if (newListName.length) updateList({ id: list.id, name: newListName });
     setIsEditing(false);
   };
 

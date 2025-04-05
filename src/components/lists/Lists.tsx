@@ -1,6 +1,7 @@
 import { useLists } from "../../contexts/ListsContext";
 import { Id } from "../../types/Id";
 import { ListItem } from "../listItem/ListItem";
+import "./Lists.css";
 
 export function Lists() {
   const { lists, currentListId, updateCurrentListId } = useLists();
