@@ -10,7 +10,7 @@ export interface TaskListItemHandle {
 interface TaskListItemProps {
   task: Task;
   handleDelete: (taskId: string | number) => void;
-  handleUpdate: (task: Partial<Task>) => void;
+  handleUpdate: (task: Task) => void;
 }
 
 export const TaskListItem = ({
@@ -22,13 +22,13 @@ export const TaskListItem = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCheck = (isChecked: boolean) => {
-    handleUpdate({ id: task.id, isDone: !isChecked });
+  const handleCheck = (updatedTask: Task) => {
+    handleUpdate({ ...task, isDone: !updatedTask.isDone });
   };
 
   const handleSave = (newTaskName: string, task: Task) => {
     if (newTaskName.trim()) {
-      handleUpdate({ id: task.id, name: newTaskName });
+      handleUpdate({ ...task, name: newTaskName });
     } else {
       setNewTaskName(task.name);
     }
@@ -42,7 +42,7 @@ export const TaskListItem = ({
           checked={task.isDone}
           className="checkbox"
           type="checkbox"
-          onChange={() => handleCheck(task.isDone)}
+          onChange={() => handleCheck(task)}
         />
         <div className="input-container" onClick={() => setIsEditing(true)}>
           {isEditing ? (

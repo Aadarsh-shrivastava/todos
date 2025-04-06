@@ -11,8 +11,8 @@ interface ListsContextProps {
   deleteList: (id: Id) => void;
   deleteTask: (listId: Id, taskId: Id) => void;
   lists: List[];
-  updateList: (updatedList: Partial<List>) => void;
-  updateTask: (listId: Id, updatedTask: Partial<Task>) => void;
+  updateList: (updatedList: List) => void;
+  updateTask: (listId: Id, updatedTask: Task) => void;
   getListByListId: (listId: Id) => List | undefined;
 }
 
@@ -42,82 +42,70 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const addList = (list: List) => {
-    setLists((prevLists) => {
-      const updatedLists = [{ ...list, tasks: [] }, ...prevLists];
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+    const updatedLists = [{ ...list, tasks: [] }, ...lists];
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
-  const updateList = (updatedList: Partial<List>) => {
-    setLists((prevLists) => {
-      const updatedLists = prevLists.map((list) =>
-        list.id === updatedList.id
-          ? { ...list, ...updatedList, modifiedAt: new Date() }
-          : list
-      );
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+  const updateList = (updatedList: List) => {
+    const updatedLists = lists.map((list) =>
+      list.id === updatedList.id
+        ? { ...list, ...updatedList, modifiedAt: new Date() }
+        : list
+    );
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
   const deleteList = (id: Id) => {
-    setLists((prevLists) => {
-      const updatedLists = prevLists.filter((list) => list.id !== id);
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+    const updatedLists = lists.filter((list) => list.id !== id);
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
   const addTask = (listId: Id, task: Task): void => {
-    setLists((prevLists) => {
-      const updatedLists = prevLists.map((list) =>
-        list.id === listId
-          ? {
-              ...list,
-              taskCount: list.taskCount + 1,
-              tasks: [task, ...list.tasks],
-            }
-          : list
-      );
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+    const updatedLists = lists.map((list) =>
+      list.id === listId
+        ? {
+            ...list,
+            taskCount: list.taskCount + 1,
+            tasks: [task, ...list.tasks],
+          }
+        : list
+    );
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
-  const updateTask = (listId: Id, updatedTask: Partial<Task>) => {
-    setLists((prevLists) => {
-      const updatedLists = prevLists.map((list) =>
-        list.id === listId
-          ? {
-              ...list,
-              tasks: list.tasks.map((task) =>
-                task.id === updatedTask.id
-                  ? { ...task, ...updatedTask, modifiedAt: new Date() }
-                  : task
-              ),
-            }
-          : list
-      );
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+  const updateTask = (listId: Id, updatedTask: Task) => {
+    const updatedLists = lists.map((list) =>
+      list.id === listId
+        ? {
+            ...list,
+            tasks: list.tasks.map((task) =>
+              task.id === updatedTask.id
+                ? { ...task, ...updatedTask, modifiedAt: new Date() }
+                : task
+            ),
+          }
+        : list
+    );
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
   const deleteTask = (listId: Id, taskId: Id) => {
-    setLists((prevLists) => {
-      const updatedLists = prevLists.map((list) =>
-        list.id === listId
-          ? {
-              ...list,
-              taskCount: list.taskCount - 1,
-              tasks: list.tasks.filter((task) => task.id !== taskId),
-            }
-          : list
-      );
-      saveToLocalStorage(updatedLists);
-      return updatedLists;
-    });
+    const updatedLists = lists.map((list) =>
+      list.id === listId
+        ? {
+            ...list,
+            taskCount: list.taskCount - 1,
+            tasks: list.tasks.filter((task) => task.id !== taskId),
+          }
+        : list
+    );
+    setLists(updatedLists);
+    saveToLocalStorage(updatedLists);
   };
 
   const getListByListId = (listId: Id) => {

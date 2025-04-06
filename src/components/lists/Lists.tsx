@@ -6,8 +6,8 @@ import "./Lists.css";
 export function Lists() {
   const { lists, currentListId, updateCurrentListId } = useLists();
 
-  const handleListClick = (id: Id) => {
-    updateCurrentListId(id);
+  const handleListClick = (listId: Id) => {
+    updateCurrentListId(listId);
   };
 
   return (

@@ -19,7 +19,7 @@ export function TaskListArea() {
     deleteTask(list?.id, taskId);
   };
 
-  const handleUpdate = (updatedTask: Partial<Task>) => {
+  const handleUpdate = (updatedTask: Task) => {
     if (list) {
       updateTask(list?.id, updatedTask);
     }

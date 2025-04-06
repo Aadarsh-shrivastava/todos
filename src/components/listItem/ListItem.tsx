@@ -3,6 +3,7 @@ import bin from "../../assets/bin.svg";
 import { useLists } from "../../contexts/ListsContext";
 import { useEffect, useRef, useState } from "react";
 import "./ListItem.css";
+import { Id } from "../../types/Id";
 
 interface ListItemInterface {
   list: List;
@@ -16,16 +17,16 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
 
   const { deleteList, updateList } = useLists();
 
-  const handleDelete = () => {
-    deleteList(list.id);
+  const handleDelete = (listId: Id) => {
+    deleteList(listId);
   };
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    if (newListName.length) updateList({ id: list.id, name: newListName });
+  const handleSave = (list: List) => {
+    if (newListName.length) updateList({ ...list, name: newListName });
     setIsEditing(false);
   };
 
@@ -33,9 +34,9 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
     setNewListName(e.target.value);
   };
 
-  const handleBlur = (name: string) => {
-    if (newListName !== name) {
-      handleSave();
+  const handleBlur = (list: List) => {
+    if (newListName !== list.name) {
+      handleSave(list);
     } else {
       setIsEditing(false);
     }
@@ -47,7 +48,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
       ) {
-        handleBlur(list.name);
+        handleBlur(list);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -68,9 +69,9 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
               ref={inputRef}
               type="text"
               value={newListName}
-              onBlur={() => handleBlur(list.name)}
+              onBlur={() => handleBlur(list)}
               onChange={handleChange}
-              onKeyDown={(e) => e.key === "Enter" && handleSave()}
+              onKeyDown={(e) => e.key === "Enter" && handleSave(list)}
             />
           ) : (
             <div className="Listitem-name unselectable" onClick={handleEdit}>
@@ -82,7 +83,11 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
           ({list.taskCount})
         </div>
       </div>
-      <img className="Listitem-icon" src={bin} onClick={handleDelete} />
+      <img
+        className="Listitem-icon"
+        src={bin}
+        onClick={() => handleDelete(list.id)}
+      />
     </div>
   );
 }
