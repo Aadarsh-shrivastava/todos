@@ -1,18 +1,20 @@
-import { useState } from "react";
 import { useLists } from "../../contexts/ListsContext";
+import { Id } from "../../types/Id";
 import { ListItem } from "../listItem/ListItem";
+import "./Lists.css";
 
 export function Lists() {
-  const { lists } = useLists();
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const handleClick = (id: number) => {
-    setSelectedId(id);
+  const { lists, currentListId, updateCurrentListId } = useLists();
+
+  const handleListClick = (listId: Id) => {
+    updateCurrentListId(listId);
   };
+
   return (
     <div className="list-container">
       {lists.map((list) => (
-        <div key={list.id} onClick={() => handleClick(list.id)}>
-          <ListItem isSelected={selectedId === list.id} list={list} />
+        <div key={list.id} onClick={() => handleListClick(list.id)}>
+          <ListItem isSelected={currentListId === list.id} list={list} />
         </div>
       ))}
     </div>
