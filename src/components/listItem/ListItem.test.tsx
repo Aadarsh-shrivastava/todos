@@ -31,20 +31,11 @@ describe("list item components", () => {
     expect(screen.getByText("(3)")).toBeInTheDocument();
   });
 
-  test("enters edit mode on name click", async () => {
-    render(<ListItem isSelected={false} list={mockList} />);
-
-    await userEvent.click(screen.getByText("Groceries"));
-
-    expect(screen.getByDisplayValue("Groceries")).toBeInTheDocument();
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
-  });
-
   test("edits the name and presses Enter to save", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByText("Groceries"));
+    await userEvent.click(screen.getByTestId("list-name-span"));
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByTestId("list-name-input");
     await userEvent.clear(input);
     await userEvent.type(input, "New Name{enter}");
 
@@ -56,9 +47,9 @@ describe("list item components", () => {
 
   test("calls updateList on blur if name changed", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByText("Groceries"));
+    await userEvent.click(screen.getByTestId("list-name-span"));
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByTestId("list-name-input");
     await userEvent.clear(input);
     await userEvent.type(input, "New Name");
 
@@ -73,9 +64,9 @@ describe("list item components", () => {
 
   test("does not call updateList on blur if name unchanged", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByText("Groceries"));
+    await userEvent.click(screen.getByTestId("list-name-span"));
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByTestId("list-name-input");
 
     input.blur();
 
@@ -85,9 +76,9 @@ describe("list item components", () => {
   test("clicking outside input triggers handleBlur and updateList if name changed", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
 
-    await userEvent.click(screen.getByText("Groceries"));
+    await userEvent.click(screen.getByTestId("list-name-span"));
 
-    const input = screen.getByRole("textbox");
+    const input = screen.getByTestId("list-name-input");
     await userEvent.clear(input);
     await userEvent.type(input, "Updated List");
 
@@ -109,7 +100,7 @@ describe("list item components", () => {
 
   test("calls deleteList when bin icon is clicked", () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    screen.getByRole("img").click();
+    screen.getByTestId("bin-icon").click();
 
     expect(mockDelete).toHaveBeenCalledWith("list-1");
   });

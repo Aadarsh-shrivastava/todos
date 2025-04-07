@@ -67,6 +67,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
             <input
               autoFocus
               className="editable-list-input unselectable"
+              data-testid="list-name-input"
               ref={inputRef}
               type="text"
               value={newListName}
@@ -75,7 +76,11 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
               onKeyDown={(e) => e.key === "Enter" && handleSave(list)}
             />
           ) : (
-            <div className="Listitem-name unselectable" onClick={handleEdit}>
+            <div
+              className="Listitem-name unselectable"
+              data-testid="list-name-span"
+              onClick={handleEdit}
+            >
               {list.name}
             </div>
           )}
@@ -86,6 +91,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
       </div>
       <img
         className="Listitem-icon"
+        data-testid="bin-icon"
         src={bin}
         onClick={() => handleDelete(list.id)}
       />
