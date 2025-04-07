@@ -2,6 +2,7 @@ import { List } from "../../types/List";
 import bin from "../../assets/bin.svg";
 import { useLists } from "../../contexts/ListsContext";
 import { useEffect, useRef, useState } from "react";
+import React from "react";
 import "./ListItem.css";
 import { Id } from "../../types/Id";
 
