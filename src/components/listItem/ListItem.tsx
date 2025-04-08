@@ -2,6 +2,7 @@ import { List } from "../../types/List";
 import bin from "../../assets/bin.svg";
 import { useLists } from "../../contexts/ListsContext";
 import { useEffect, useRef, useState } from "react";
+import React from "react";
 import "./ListItem.css";
 import { Id } from "../../types/Id";
 
@@ -66,6 +67,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
             <input
               autoFocus
               className="editable-list-input unselectable"
+              data-testid={`list-name-input-${list.id}`}
               ref={inputRef}
               type="text"
               value={newListName}
@@ -74,7 +76,11 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
               onKeyDown={(e) => e.key === "Enter" && handleSave(list)}
             />
           ) : (
-            <div className="Listitem-name unselectable" onClick={handleEdit}>
+            <div
+              className="Listitem-name unselectable"
+              data-testid={`list-name-span-${list.id}`}
+              onClick={handleEdit}
+            >
               {list.name}
             </div>
           )}
@@ -85,6 +91,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
       </div>
       <img
         className="Listitem-icon"
+        data-testid={`bin-icon-${list.id}`}
         src={bin}
         onClick={() => handleDelete(list.id)}
       />

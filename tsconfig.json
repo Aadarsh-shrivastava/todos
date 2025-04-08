@@ -6,8 +6,11 @@
   ],
   "compilerOptions": {
     "skipLibCheck": true,
+    "types": ["@testing-library/jest-dom"],
+    "rootDir": "./src",
     "jsx": "react",
-    "types": ["@testing-library/jest-dom"]
+    "isolatedModules": true,
+    "esModuleInterop": true
   },
   "types": ["@testing-library/jest-dom"]
 }
