@@ -1,3 +1,4 @@
+import React from "react";
 import "./AddTaskButton.css";
 
 interface AddTaskButtonProps {
@@ -6,7 +7,11 @@ interface AddTaskButtonProps {
 
 export const AddTaskButton = ({ onAddTaskClick }: AddTaskButtonProps) => {
   return (
-    <button className="fab-button" onClick={onAddTaskClick}>
+    <button
+      className="fab-button"
+      data-testid={"add-task-button"}
+      onClick={onAddTaskClick}
+    >
       +
     </button>
   );
