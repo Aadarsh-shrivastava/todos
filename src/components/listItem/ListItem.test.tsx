@@ -33,9 +33,9 @@ describe("list item components", () => {
 
   test("edits the name and presses Enter to save", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByTestId("list-name-span"));
+    await userEvent.click(screen.getByTestId("list-name-span-1"));
 
-    const input = screen.getByTestId("list-name-input");
+    const input = screen.getByTestId("list-name-input-1");
     await userEvent.clear(input);
     await userEvent.type(input, "New Name{enter}");
 
@@ -47,9 +47,9 @@ describe("list item components", () => {
 
   test("calls updateList on blur if name changed", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByTestId("list-name-span"));
+    await userEvent.click(screen.getByTestId("list-name-span-1"));
 
-    const input = screen.getByTestId("list-name-input");
+    const input = screen.getByTestId("list-name-input-1");
     await userEvent.clear(input);
     await userEvent.type(input, "New Name");
 
@@ -64,9 +64,9 @@ describe("list item components", () => {
 
   test("does not call updateList on blur if name unchanged", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    await userEvent.click(screen.getByTestId("list-name-span"));
+    await userEvent.click(screen.getByTestId("list-name-span-1"));
 
-    const input = screen.getByTestId("list-name-input");
+    const input = screen.getByTestId("list-name-input-1");
 
     input.blur();
 
@@ -76,12 +76,12 @@ describe("list item components", () => {
   test("clicking outside input triggers handleBlur and updateList if name changed", async () => {
     render(<ListItem isSelected={false} list={mockList} />);
 
-    await userEvent.click(screen.getByTestId("list-name-span"));
+    await userEvent.click(screen.getByTestId("list-name-span-1"));
 
-    const input = screen.getByTestId("list-name-input");
+    const input = screen.getByTestId("list-name-input-1");
     await userEvent.clear(input);
     await userEvent.type(input, "Updated List");
-
+    input.blur();
     const outside = document.createElement("div");
     document.body.appendChild(outside);
 
@@ -100,7 +100,7 @@ describe("list item components", () => {
 
   test("calls deleteList when bin icon is clicked", () => {
     render(<ListItem isSelected={false} list={mockList} />);
-    screen.getByTestId("bin-icon").click();
+    screen.getByTestId("bin-icon-1").click();
 
     expect(mockDelete).toHaveBeenCalledWith("list-1");
   });
