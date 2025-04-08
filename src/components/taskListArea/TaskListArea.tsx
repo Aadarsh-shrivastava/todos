@@ -1,3 +1,4 @@
+import React from "react";
 import { useLists } from "../../contexts/ListsContext";
 import { List } from "../../types/List";
 import { Task } from "../../types/Task";
@@ -15,13 +16,14 @@ export function TaskListArea() {
     : null;
 
   const handleDelete = (taskId: Id) => {
-    if (!list?.id || !taskId) return;
-    deleteTask(list?.id, taskId);
+    if (list) {
+      deleteTask(list.id, taskId);
+    }
   };
 
   const handleUpdate = (updatedTask: Task) => {
     if (list) {
-      updateTask(list?.id, updatedTask);
+      updateTask(list.id, updatedTask);
     }
   };
 
@@ -34,7 +36,7 @@ export function TaskListArea() {
         modifiedAt: new Date(),
         name: "new task",
       };
-      addTask(list?.id, newTask);
+      addTask(list.id, newTask);
     }
   };
 

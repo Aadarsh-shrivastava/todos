@@ -1,7 +1,7 @@
 export type Task = {
-  createdAt: Date;
+  createdAt?: Date;
   id: number | string;
   isDone: boolean;
-  modifiedAt: Date;
+  modifiedAt?: Date;
   name: string;
 };

@@ -1,9 +1,10 @@
+import { Id } from "./Id";
 import { Task } from "./Task";
 
 export type List = {
   createdAt?: Date;
   icon?: string;
-  id: number | string;
+  id: Id;
   modifiedAt?: Date;
   name: string;
   taskCount: number;
