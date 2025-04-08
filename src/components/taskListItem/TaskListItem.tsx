@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import React from "react";
+import { useState } from "react";
 import { Task } from "../../types/Task";
 import bin from "../../assets/bin.svg";
 import "./TaskListItem.css";
@@ -20,14 +21,13 @@ export const TaskListItem = ({
 }: TaskListItemProps) => {
   const [newTaskName, setNewTaskName] = useState<string>(task.name);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCheck = (updatedTask: Task) => {
     handleUpdate({ ...task, isDone: !updatedTask.isDone });
   };
 
   const handleSave = (newTaskName: string, task: Task) => {
-    if (newTaskName.trim()) {
+    if (newTaskName.trim() && newTaskName !== task.name) {
       handleUpdate({ ...task, name: newTaskName });
     } else {
       setNewTaskName(task.name);
@@ -41,6 +41,7 @@ export const TaskListItem = ({
         <input
           checked={task.isDone}
           className="checkbox"
+          data-testid={`task-list-item-checkbox-${task.id}`}
           type="checkbox"
           onChange={() => handleCheck(task)}
         />
@@ -49,7 +50,7 @@ export const TaskListItem = ({
             <input
               autoFocus
               className="editable-task-input"
-              ref={inputRef}
+              data-testid={`task-list-item-input-${task.id}`}
               type="text"
               value={newTaskName}
               onBlur={() => handleSave(newTaskName, task)}
@@ -63,6 +64,7 @@ export const TaskListItem = ({
           ) : (
             <span
               className={`task-name ${task.isDone ? "strike-through" : ""}`}
+              data-testid={`task-list-item-span-${task.id}`}
             >
               {newTaskName}
             </span>
@@ -74,6 +76,7 @@ export const TaskListItem = ({
           <img
             alt="Delete task"
             className="button-icon unselectable"
+            data-testid={`task-list-item-bin-${task.id}`}
             src={bin}
             onClick={() => handleDelete(task.id)}
           />
