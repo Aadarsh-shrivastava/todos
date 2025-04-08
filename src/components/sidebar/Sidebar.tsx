@@ -5,6 +5,7 @@ import { AddListButton } from "../addListButton/AddListButton";
 import { Lists } from "../lists/Lists";
 import { SidebarHeader } from "../sidebarHeader/SidebarHeader";
 import "./Sidebar.css";
+import React from "react";
 
 export function Sidebar() {
   const { addList } = useLists();
@@ -46,12 +47,14 @@ export function Sidebar() {
     <>
       <div
         className={`menu-button ${isOpen ? "hidden" : ""}`}
+        data-testid={"menu-button"}
         onClick={() => setIsOpen(!isOpen)}
       >
         ☰
       </div>
       <aside
         className={`sidebar-container ${isOpen ? "open" : "close"}`}
+        data-testid={"sidebar"}
         id="sidebar"
         ref={sidebarRef}
       >
