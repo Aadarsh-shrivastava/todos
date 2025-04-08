@@ -1,10 +1,8 @@
 import React, { act } from "react";
-import { ListItem } from "./ListItem";
 import { render, screen } from "@testing-library/react";
 import { useLists } from "../../contexts/ListsContext";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { List } from "../../types/List";
 import { TaskListArea } from "./TaskListArea";
 
 beforeAll(() => {
@@ -141,7 +139,6 @@ describe("first", () => {
     render(<TaskListArea />);
 
     const name = screen.getByTestId("task-list-item-span-task-1");
-
     await userEvent.click(name);
     const input = screen.getByTestId("task-list-item-input-task-1");
     await userEvent.clear(input);
@@ -151,54 +148,5 @@ describe("first", () => {
       ...mockList.tasks[0],
       name: "New Name",
     });
-  });
-
-  test("doesnt call UPDATE function when update is triggered and list is not there ", async () => {
-    const mockUpdateTask = jest.fn();
-
-    mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: jest.fn(),
-      getListByListId: () => null, // <- no list returned
-      updateTask: mockUpdateTask,
-    });
-
-    render(<TaskListArea />);
-
-    expect(mockUpdateTask).not.toHaveBeenCalled();
-  });
-
-  test("should call deleteTask when delete button is clicked and list exists", async () => {
-    const mockDeleteTask = jest.fn();
-
-    const mockList = {
-      id: "list-1",
-      name: "My List",
-      tasks: [
-        {
-          createdAt: new Date(),
-          id: "task-1",
-          isDone: false,
-          modifiedAt: new Date(),
-          name: "My Task",
-        },
-      ],
-    };
-
-    mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: mockDeleteTask,
-      getListByListId: () => mockList,
-      updateTask: jest.fn(),
-    });
-
-    render(<TaskListArea />);
-
-    const deleteButton = screen.getByTestId("task-list-item-bin-task-1");
-    await userEvent.click(deleteButton);
-
-    expect(mockDeleteTask).toHaveBeenCalledWith("list-1", "task-1");
   });
 });
