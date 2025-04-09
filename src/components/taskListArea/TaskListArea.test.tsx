@@ -64,7 +64,9 @@ describe("first", () => {
     render(<TaskListArea />);
 
     expect(
-      screen.getByText(/Oops!!! there are no tasks here/i)
+      screen.getByText(
+        /Oops!!! there are no tasks here, add a list from the sidebar to create tasks./i
+      )
     ).toBeInTheDocument();
   });
 

@@ -4,8 +4,8 @@ import { Task } from "../types/Task";
 import { Id } from "../types/Id";
 
 interface ListsContextProps {
-  currentListId: Id | undefined;
-  updateCurrentListId: (id: Id | undefined) => void;
+  currentListId: Id | undefined | null;
+  updateCurrentListId: (id: Id | undefined | null) => void;
   addList: (list: List) => void;
   addTask: (listId: Id, task: Task) => void;
   deleteList: (id: Id) => void;
@@ -21,23 +21,15 @@ const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>([]);
 
-  const [currentListId, setCurrentListId] = useState<Id | undefined>(
-    lists?.[0]?.id
+  const [currentListId, setCurrentListId] = useState<Id | null | undefined>(
+    undefined
   );
-
-  useEffect(() => {
-    const storedLists = localStorage.getItem("lists");
-    const updatedList = storedLists ? JSON.parse(storedLists) : [];
-
-    setLists(updatedList);
-    setCurrentListId(updatedList.length ? updatedList[0].id : null);
-  }, []);
 
   const saveToLocalStorage = (updatedLists: List[]) => {
     localStorage.setItem("lists", JSON.stringify(updatedLists));
   };
 
-  const updateCurrentListId = (id: Id | undefined) => {
+  const updateCurrentListId = (id: Id | null | undefined) => {
     setCurrentListId(id);
   };
 
@@ -61,6 +53,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     const updatedLists = lists.filter((list) => list.id !== id);
     setLists(updatedLists);
     saveToLocalStorage(updatedLists);
+      setCurrentListId(updatedLists.length ? updatedLists[0].id : undefined);
   };
 
   const addTask = (listId: Id, task: Task): void => {
@@ -111,6 +104,14 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const getListByListId = (listId: Id) => {
     return lists.find((item) => item.id === listId);
   };
+
+  useEffect(() => {
+    const storedLists = localStorage.getItem("lists");
+    const updatedList = storedLists ? JSON.parse(storedLists) : [];
+
+    setLists(updatedList);
+    setCurrentListId(updatedList.length ? updatedList[0].id : null);
+  }, []);
 
   return (
     <ListsContext.Provider
