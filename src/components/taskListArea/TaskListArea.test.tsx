@@ -1,4 +1,4 @@
-import React, { act } from "react";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useLists } from "../../contexts/ListsContext";
 import "@testing-library/jest-dom";
@@ -16,7 +16,7 @@ beforeAll(() => {
 jest.mock("../../contexts/ListsContext", () => ({ useLists: jest.fn() }));
 
 jest.mock("../addTaskButton/AddTaskButon", () => ({
-  AddTaskButton: ({ onAddTaskClick }: any) => (
+  AddTaskButton: ({ onAddTaskClick }: { onAddTaskClick: () => void }) => (
     <button data-testid="mock-add-task-button" onClick={onAddTaskClick}>
       +
     </button>
@@ -37,17 +37,28 @@ const mockList = {
     },
   ],
 };
+const mockDeleteTask = jest.fn();
+const mockUpdateTask = jest.fn();
+const mockAddTask = jest.fn();
 
 const mockUseLists = useLists as jest.Mock;
+const baseMockReturnValue = {
+  addTask: mockAddTask,
+  currentListId: "list-1",
+  deleteTask: mockDeleteTask,
+  getListByListId: () => mockList,
+  updateTask: mockUpdateTask,
+};
 
 describe("first", () => {
+  beforeEach(() => {
+    mockUseLists.mockReturnValue({ ...baseMockReturnValue });
+  });
+
   test("shows fallback message when no current list is selected", () => {
     mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
+      ...baseMockReturnValue,
       currentListId: null,
-      deleteTask: jest.fn(),
-      getListByListId: jest.fn(),
-      updateTask: jest.fn(),
     });
 
     render(<TaskListArea />);
@@ -58,14 +69,6 @@ describe("first", () => {
   });
 
   test("should render list name and task when a list is selected", () => {
-    mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: jest.fn(),
-      getListByListId: () => mockList,
-      updateTask: jest.fn(),
-    });
-
     render(<TaskListArea />);
 
     expect(screen.getByText("TO DO")).toBeInTheDocument();
@@ -74,15 +77,6 @@ describe("first", () => {
   });
 
   test("should call add task when add task button is clicked", async () => {
-    const mockAddTask = jest.fn();
-    mockUseLists.mockReturnValue({
-      addTask: mockAddTask,
-      currentListId: "list-1",
-      deleteTask: jest.fn(),
-      getListByListId: () => mockList,
-      updateTask: jest.fn(),
-    });
-
     render(<TaskListArea />);
     const button = screen.getByTestId("mock-add-task-button");
     await userEvent.click(button);
@@ -91,16 +85,6 @@ describe("first", () => {
   });
 
   test("calls delete function when delete is triggered ", async () => {
-    const mockDeleteTask = jest.fn();
-
-    mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: mockDeleteTask,
-      getListByListId: () => mockList,
-      updateTask: jest.fn(),
-    });
-
     render(<TaskListArea />);
 
     const deleteButton = screen.getByTestId("task-list-item-bin-task-1");
@@ -110,14 +94,9 @@ describe("first", () => {
   });
 
   test("doesnt call delete function when delete is triggered ", async () => {
-    const mockDeleteTask = jest.fn();
-
     mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: mockDeleteTask,
+      ...baseMockReturnValue,
       getListByListId: () => null,
-      updateTask: jest.fn(),
     });
 
     render(<TaskListArea />);
@@ -126,16 +105,6 @@ describe("first", () => {
   });
 
   test("calls UPDATE function when update is triggered ", async () => {
-    const mockUpdateTask = jest.fn();
-
-    mockUseLists.mockReturnValue({
-      addTask: jest.fn(),
-      currentListId: "list-1",
-      deleteTask: jest.fn(),
-      getListByListId: () => mockList,
-      updateTask: mockUpdateTask,
-    });
-
     render(<TaskListArea />);
 
     const name = screen.getByTestId("task-list-item-span-task-1");
