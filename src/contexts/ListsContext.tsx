@@ -53,11 +53,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     const updatedLists = lists.filter((list) => list.id !== id);
     setLists(updatedLists);
     saveToLocalStorage(updatedLists);
-    if (updatedLists.length === 0) {
-      setCurrentListId(undefined);
-    } else if (currentListId === id) {
-      setCurrentListId(updatedLists[0].id);
-    }
+      setCurrentListId(updatedLists.length ? updatedLists[0].id : undefined);
   };
 
   const addTask = (listId: Id, task: Task): void => {
