@@ -4,8 +4,8 @@ import { Task } from "../types/Task";
 import { Id } from "../types/Id";
 
 interface ListsContextProps {
-  currentListId: Id | undefined;
-  updateCurrentListId: (id: Id | undefined) => void;
+  currentListId: Id | undefined | null;
+  updateCurrentListId: (id: Id | undefined | null) => void;
   addList: (list: List) => void;
   addTask: (listId: Id, task: Task) => void;
   deleteList: (id: Id) => void;
@@ -21,7 +21,7 @@ const ListsContext = createContext<ListsContextProps | undefined>(undefined);
 export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>([]);
 
-  const [currentListId, setCurrentListId] = useState<Id | undefined>(
+  const [currentListId, setCurrentListId] = useState<Id | null | undefined>(
     lists?.[0]?.id
   );
 
@@ -37,7 +37,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("lists", JSON.stringify(updatedLists));
   };
 
-  const updateCurrentListId = (id: Id | undefined) => {
+  const updateCurrentListId = (id: Id | null | undefined) => {
     setCurrentListId(id);
   };
 
@@ -61,6 +61,13 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     const updatedLists = lists.filter((list) => list.id !== id);
     setLists(updatedLists);
     saveToLocalStorage(updatedLists);
+    setTimeout(() => {
+      if (updatedLists.length === 0) {
+        setCurrentListId(undefined);
+      } else if (currentListId === id) {
+        setCurrentListId(updatedLists[0].id);
+      }
+    }, 0);
   };
 
   const addTask = (listId: Id, task: Task): void => {

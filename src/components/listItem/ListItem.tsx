@@ -40,6 +40,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
       handleSave(list);
     } else {
       setIsEditing(false);
+      setNewListName(list.name);
     }
   };
 

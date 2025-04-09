@@ -73,6 +73,8 @@
 .alt-message {
   font-size: larger;
   margin: auto;
+  margin-top: 100px;
+  padding: auto;
 }
 
 @media (min-width: 768px) {
