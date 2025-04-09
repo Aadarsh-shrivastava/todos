@@ -36,7 +36,9 @@ export const TaskListItem = ({
   };
 
   const handleEdit = () => {
-    if (!task.isDone) setIsEditing(true);
+    if (!task.isDone) {
+    setIsEditing(true);
+    };
   };
 
   return (
