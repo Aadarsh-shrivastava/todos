@@ -3,6 +3,7 @@ import { useLists } from "../../contexts/ListsContext";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { Sidebar } from "./Sidebar";
 
 beforeAll(() => {
   Object.defineProperty(global, "crypto", {
@@ -30,8 +31,6 @@ jest.mock("../addListButton/AddListButton", () => ({
     </button>
   ),
 }));
-
-import { Sidebar } from "./Sidebar";
 
 describe("Sidebar", () => {
   const mockAddList = jest.fn();

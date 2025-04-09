@@ -47,14 +47,14 @@ export function Sidebar() {
     <>
       <div
         className={`menu-button ${isOpen ? "hidden" : ""}`}
-        data-testid={"menu-button"}
+        data-testid="menu-button"
         onClick={() => setIsOpen(!isOpen)}
       >
         ☰
       </div>
       <aside
         className={`sidebar-container ${isOpen ? "open" : "close"}`}
-        data-testid={"sidebar"}
+        data-testid="sidebar"
         id="sidebar"
         ref={sidebarRef}
       >
