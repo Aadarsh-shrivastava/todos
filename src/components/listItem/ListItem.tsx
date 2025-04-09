@@ -36,7 +36,7 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
   };
 
   const handleBlur = (list: List) => {
-    if (newListName !== list.name) {
+    if (newListName.trim() && newListName !== list.name) {
       handleSave(list);
     } else {
       setIsEditing(false);

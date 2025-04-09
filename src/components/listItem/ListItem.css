@@ -9,6 +9,7 @@
   align-items: center;
   border: 1px transparent solid;
   border-radius: 5px;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   height: 50px;

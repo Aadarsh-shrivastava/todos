@@ -35,6 +35,10 @@ export const TaskListItem = ({
     setIsEditing(false);
   };
 
+  const handleEdit = () => {
+    if (!task.isDone) setIsEditing(true);
+  };
+
   return (
     <div className="task-list-item">
       <div className="list-item-title-checkbox">
@@ -45,7 +49,7 @@ export const TaskListItem = ({
           type="checkbox"
           onChange={() => handleCheck(task)}
         />
-        <div className="input-container" onClick={() => setIsEditing(true)}>
+        <div className="input-container" onClick={handleEdit}>
           {isEditing ? (
             <input
               autoFocus

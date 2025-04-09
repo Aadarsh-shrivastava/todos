@@ -44,10 +44,13 @@ export function TaskListArea() {
     <div className="taskListArea">
       {!currentListId ? (
         <div className="alt-message">
-          <p> Oops!!! there are no tasks here , go to a list </p>
+          <p>
+            Oops!!! there are no tasks here, add a list from the sidebar to
+            create tasks.
+          </p>
         </div>
       ) : (
-        <>
+        <div className="body">
           <div className="headers">
             <div className={`title`}>TO DO</div>
             <div className="header">
@@ -65,7 +68,7 @@ export function TaskListArea() {
               />
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
