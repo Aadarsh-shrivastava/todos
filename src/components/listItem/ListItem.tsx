@@ -94,7 +94,10 @@ export function ListItem({ list, isSelected }: ListItemInterface) {
         className="Listitem-icon"
         data-testid={`bin-icon-${list.id}`}
         src={bin}
-        onClick={() => handleDelete(list.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleDelete(list.id);
+        }}
       />
     </div>
   );

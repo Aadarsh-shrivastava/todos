@@ -22,16 +22,8 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const [lists, setLists] = useState<List[]>([]);
 
   const [currentListId, setCurrentListId] = useState<Id | null | undefined>(
-    lists?.[0]?.id
+    undefined
   );
-
-  useEffect(() => {
-    const storedLists = localStorage.getItem("lists");
-    const updatedList = storedLists ? JSON.parse(storedLists) : [];
-
-    setLists(updatedList);
-    setCurrentListId(updatedList.length ? updatedList[0].id : null);
-  }, []);
 
   const saveToLocalStorage = (updatedLists: List[]) => {
     localStorage.setItem("lists", JSON.stringify(updatedLists));
@@ -61,13 +53,11 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
     const updatedLists = lists.filter((list) => list.id !== id);
     setLists(updatedLists);
     saveToLocalStorage(updatedLists);
-    setTimeout(() => {
-      if (updatedLists.length === 0) {
-        setCurrentListId(undefined);
-      } else if (currentListId === id) {
-        setCurrentListId(updatedLists[0].id);
-      }
-    }, 0);
+    if (updatedLists.length === 0) {
+      setCurrentListId(undefined);
+    } else if (currentListId === id) {
+      setCurrentListId(updatedLists[0].id);
+    }
   };
 
   const addTask = (listId: Id, task: Task): void => {
@@ -118,6 +108,14 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
   const getListByListId = (listId: Id) => {
     return lists.find((item) => item.id === listId);
   };
+
+  useEffect(() => {
+    const storedLists = localStorage.getItem("lists");
+    const updatedList = storedLists ? JSON.parse(storedLists) : [];
+
+    setLists(updatedList);
+    setCurrentListId(updatedList.length ? updatedList[0].id : null);
+  }, []);
 
   return (
     <ListsContext.Provider

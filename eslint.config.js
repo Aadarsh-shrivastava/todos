@@ -30,6 +30,7 @@ export default tseslint.config(
       // 'prettier/prettier': 'error',
       "sort-keys": ["error", "asc", { "caseSensitive": true, "natural": false, "minKeys": 2 }],
       'sort-keys-fix/sort-keys-fix': 'error',
+      "unused-imports/no-unused-imports": "warn",
       "react/jsx-sort-props": [
         "error",
         {
