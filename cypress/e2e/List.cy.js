@@ -4,7 +4,7 @@ describe('Add List Flow', () => {
     cy.visit("http://localhost:5173");
   });
 
-  it("adds a new list when the button is clicked", () => {
+  it("List Flow (add, rename and delte )", () => {
     //click on add list button
     cy.get('[data-testid="add-list-button"]').click();
 

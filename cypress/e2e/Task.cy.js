@@ -4,8 +4,8 @@ describe('Add List Flow', () => {
         cy.visit("http://localhost:5173");
     });
 
-    it("adds a new list when the button is clicked", () => {
-        //click on add list button
+    it("Task flow (add , rename, check and delete)", () => {
+        //click on add task button
         cy.get('[data-testid="add-list-button"]').click();
 
 
@@ -16,7 +16,7 @@ describe('Add List Flow', () => {
 
         cy.get('[data-testid="add-task-button"]').click();
 
-        // test new list name and length
+        // test new task name and length
         cy.contains("new task").should("be.visible");
         cy.get('.task-list').should("have.length", 1);
 
@@ -34,7 +34,7 @@ describe('Add List Flow', () => {
         // click on the delete icon and delete the task
         cy.get(".bin-icon").first().click();
 
-        //test length of list items 
+        //test length of task items 
         cy.get(`task-list`).should("have.length", 0);
 
 
