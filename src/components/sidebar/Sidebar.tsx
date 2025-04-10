@@ -61,7 +61,7 @@ export function Sidebar() {
         <div className={`sidebar-header`}>
           <SidebarHeader />
         </div>
-        <div className="list" data-testid="list">
+        <div className="list">
           <Lists />
         </div>
         <div className="add-list-button">

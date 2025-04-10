@@ -1,4 +1,4 @@
-describe('Add List Flow', () => {
+describe('Add Task Flow', () => {
     beforeEach(() => {
         cy.clearLocalStorage();
         cy.visit("http://localhost:5173");
