@@ -58,7 +58,7 @@ export function TaskListArea() {
               <AddTaskButton onAddTaskClick={() => addNewTask(list)} />
             </div>
           </div>
-          <div className="task-list">
+          <div className="task-list" data-testid="task-list">
             {list?.tasks.map((task: Task) => (
               <TaskListItem
                 handleDelete={handleDelete}
