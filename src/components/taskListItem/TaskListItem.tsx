@@ -81,7 +81,7 @@ export const TaskListItem = ({
         <div className="task-list-buttons">
           <img
             alt="Delete task"
-            className="button-icon unselectable"
+            className="bin-icon unselectable"
             data-testid={`task-list-item-bin-${task.id}`}
             src={bin}
             onClick={() => handleDelete(task.id)}

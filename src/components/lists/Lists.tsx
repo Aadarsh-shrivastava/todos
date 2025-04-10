@@ -12,12 +12,16 @@ export function Lists() {
   };
 
   return (
-    <div className="list-container">
+    <>
       {lists.map((list) => (
-        <div key={list.id} onClick={() => handleListClick(list.id)}>
+        <div
+          key={list.id}
+          onClick={() => handleListClick(list.id)}
+          data-testid="list-item-cy"
+        >
           <ListItem isSelected={currentListId === list.id} list={list} />
         </div>
       ))}
-    </div>
+    </>
   );
 }
