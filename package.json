@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://aadarsh-shrivastava.github.io/todos/",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
